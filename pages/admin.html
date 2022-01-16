@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEC | KEC</title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+    <link href="../styles/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/aos.css" />
+</head>
+
+<body>
+    <div class="container-col-12">
+        <div id="splash">
+            <div>
+                <img src="../images/splash.png" alt="loading" class="p-2">
+                <p> &nbsp; Loading... </p>
+            </div>
+        </div>
+        <div id="main">
+            <nav class="navbar navbar-expand-lg bg-white  navbar-light shadow-sm sticky-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="./home.html">
+                        <img src="../images/logo.png" alt="logo" width="30" height="24"
+                            class="d-inline-block align-text-top">
+                        EEC
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto px-2">
+                            <li class="nav-item">
+                                <a class="nav-link text-success" id="adminname"></a>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success mx-2" id="tabledatabtn">User Details</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-danger" onclick="logout()">Logout</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div id="content">
+                <section id="events">
+                    <div class="row d-flex justify-content-evenly">
+                        <div class="col-lg-4 col-md-4 col-8 mx-auto text-center mt-3">
+                            <div class="alert alert-secondary" role="alert">
+                                Want to Add New Event?
+                                <button class="btn btn-outline-success" data-bs-toggle="modal"
+                                    data-bs-target="#addmodal">Add Event</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="container col-10 d-flex justify-content-evenly flex-wrap" id="bodyContent">
+
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="container col-10 d-flex justify-content-evenly flex-wrap" id="bodyContent">
+
+                        </div>
+                    </div>
+                </section>
+                <section id="tabledata">
+                    <div class="row d-flex justify-content-evenly">
+                        <div class="col-lg-4 col-md-4 col-8 mx-auto text-center mt-3">
+                            <div class="alert alert-secondary" role="alert">
+                                Want to check Event Details?
+                            <button class="btn btn-outline-success" id="crudbtn">Events Details</button>
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="table-responsive">
+                                <table class="table caption-top">
+                                    <caption class="text-center">List of users</caption>
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Sno</th>
+                                        <th scope="col">Event Name</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Registered Date Time</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="tablebody">
+                                      
+                                    </tbody>
+                                </table>
+                              </div>
+                        </div>
+                    </div>
+                </section>
+                <div>
+                    <p class="text-center fw-bold text-primary">Made with <span class="text-danger">&hearts;</span> by
+                        Anoj & Ashok</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Event Model -->
+    <div class="modal fade" id="updatemodal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Event Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-2">
+                            <label for="eventsno" class="col-form-label">Event No:</label>
+                            <input type="number" class="form-control" id="eventsno" disabled>
+                        </div>
+                        <div class="mb-2">
+                            <label for="eventname" class="col-form-label">Event Name:</label>
+                            <input type="text" class="form-control" id="eventname">
+                        </div>
+                        <div class="mb-2">
+                            <label for="eventdesc" class="col-form-label">Event Description:</label>
+                            <textarea class="form-control" id="eventdesc"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label for="postedby" class="col-form-label">Posted By:</label>
+                            <input type="email" class="form-control" id="postedby">
+                        </div>
+                        <div class="mb-2">
+                            <label for="eventcost" class="col-form-label">Event Cost:</label>
+                            <input type="number" class="form-control" id="eventcost">
+                        </div>
+                        <div class="mb-2">
+                            <label for="eventstatus" class="col-form-label">Event Completed: [Yes : 1 | No : 0]</label>
+                            <input type="number" class="form-control" id="eventstatus">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" onclick="update()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Update Event Model -->
+
+    <!-- Add Event Model -->
+    <div class="modal fade" id="addmodal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="eventname" class="col-form-label">Event Name:</label>
+                            <input type="text" class="form-control" id="eventname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventdesc" class="col-form-label">Event Description:</label>
+                            <textarea class="form-control" id="eventdesc"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postedby" class="col-form-label">Posted By:</label>
+                            <input type="email" class="form-control" id="postedby">
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventcost" class="col-form-label">Event Cost:</label>
+                            <input type="number" class="form-control" id="eventcost">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" onclick="insert()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Add Event Model -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/aos.js"></script>
+    <script src="../js/sweetalert2.all.min.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/adminlogout.js"></script>
+</body>
+
+</html>
