@@ -4,7 +4,7 @@
 // error_reporting(E_ALL);
 include_once "connection.php";
 session_start();
-if (isset($_POST['eventno']) && $_POST['eventno']) {
+if (isset($_POST['eventno']) && $_POST['eventno'] && isset($_SESSION['username'])) {
     if ($stmt = $mysqli->prepare("SELECT * FROM events WHERE sno = ?")) {
         $stmt->bind_param("i", $eventno);
         $eventno = $_POST['eventno'];
@@ -56,4 +56,7 @@ if (isset($_POST['eventno']) && $_POST['eventno']) {
     } else {
         echo json_encode(["status" => 0, "msg" => "Error in preparing statement"]);
     }
+}
+else{
+    echo json_encode(["status" => 0, "msg" => "Try to Login/Signup First"]);
 }
